@@ -9,7 +9,7 @@ using namespace std;
 struct Uzytkownik
 {
     int idUzytkownika = 0;
-    string nazwa, hasloProba1, hasloProba2;
+    string nazwa, hasloProba1;
 };
 struct Adresat
 {
@@ -61,7 +61,7 @@ string zamianaPierwszejLiteryNaDuzaResztyNaMala (string tekstDoZamiany)
     transform(tekstDoZamiany.begin()+1,tekstDoZamiany.end(),tekstDoZamiany.begin()+1,::tolower);
     return tekstDoZamiany;
 }
-void wyswietlUzytkownikowZPliku (vector <Uzytkownik> &uzytkownicy)
+void wczytajUzytkownikowZPliku (vector <Uzytkownik> &uzytkownicy)
 {
     fstream plikZUzytkownikami;
     plikZUzytkownikami.open("uzytkownicy.txt", ios::in);
@@ -377,7 +377,7 @@ void usunWybranaLinieWPliku(int numerUsuwanejLinii)
             {
                 plikTymczasowy << endl << wczytanaLinia;
             }
-            else if (numerWczytanejLinii > 2 && numerUsuwanejLinii != 1)
+            else if (numerWczytanejLinii > 1 && numerUsuwanejLinii != 1)
             {
                 plikTymczasowy << endl << wczytanaLinia;
             }
@@ -391,7 +391,7 @@ void usunWybranaLinieWPliku(int numerUsuwanejLinii)
         throw runtime_error("Problem podczas aktualizacji pliku.");
     }
 }
-void usunAdresata(vector <Adresat> &adresaci, int idAktualnieZalogowanegoUzytkownika)
+void usunAdresata(vector <Adresat> &adresaci)
 {
     int idWybranegoAdresata = 0;
     int numerLiniiWybranegoAdresata = 0;
@@ -406,7 +406,7 @@ void usunAdresata(vector <Adresat> &adresaci, int idAktualnieZalogowanegoUzytkow
 
         for (vector<Adresat>::iterator itr = adresaci.begin(); itr != adresaci.end(); itr++)
         {
-            if (itr -> idAdresata == idWybranegoAdresata && itr -> idZalogowanegoUzytkownika == idAktualnieZalogowanegoUzytkownika)
+            if (itr -> idAdresata == idWybranegoAdresata)
             {
                 adresatZnaleziony = true;
                 cout << "Czy na pewno chcesz usunac adresata o numerze ID " << idWybranegoAdresata << "? Potwierdz wciskajac klawisz t" << endl;
@@ -682,8 +682,8 @@ void rejestracjaUzytkownika(vector <Uzytkownik> &uzytkownicy)
     cout << "Podaj haslo: " << endl;
     uzytkownik.hasloProba1 = pobierzLinie();
     cout << "Powtorz wprowadzone haslo: " << endl;
-    uzytkownik.hasloProba2 = pobierzLinie();
-    if (uzytkownik.hasloProba1 == uzytkownik.hasloProba2)
+    hasloProba2 = pobierzLinie();
+    if (uzytkownik.hasloProba1 == hasloProba2)
     {
         cout << "Rejestracja przebiegla pomyslnie. Mozesz zalogowac sie na swoje konto." << endl;
         uzytkownik.idUzytkownika = uzytkownicy.empty() ? 1 : uzytkownicy.back().idUzytkownika + 1;
@@ -717,7 +717,7 @@ int main()
     int idOstatniegoAdresata = 0;
     char wybor;
 
-    wyswietlUzytkownikowZPliku(uzytkownicy);
+    wczytajUzytkownikowZPliku(uzytkownicy);
 
     while(1)
     {
@@ -778,7 +778,7 @@ int main()
                     wyswietlWszystkichAdresatow(adresaci, idAktualnieZalogowanegoUzytkownika);
                     break;
                 case '5':
-                    usunAdresata(adresaci, idAktualnieZalogowanegoUzytkownika);
+                    usunAdresata(adresaci);
                     break;
                 case '6':
                     edytujDaneAdresata(adresaci);
