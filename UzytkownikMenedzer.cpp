@@ -84,7 +84,6 @@ Uzytkownik UzytkownikMenedzer::podajDaneNowegoUzytkownika()
     cout << "Podaj haslo: ";
     cin >> haslo;
     uzytkownik.ustawHaslo(haslo);
-    adresatMenedzer.ustawIdZalogowanegoUzytkownika(0);
 
     return uzytkownik;
 }
