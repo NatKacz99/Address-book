@@ -30,7 +30,7 @@ void PlikZAdresatami::dopiszAdresataDoPliku(Adresat adresat)
 int PlikZAdresatami::wczytajAdresatowZalogowanegoUzytkownikaZPliku(vector <Adresat> adresaci, int idZalogowanegoUzytkownika)
 {
     Adresat adresat;
-    UzytkownikMenedzer uzytkownikMenedzer("Uzytkownicy.txt");
+    UzytkownikMenedzer uzytkownikMenedzer("Uzytkownicy.txt", "Adresaci.txt");
     AdresatMenedzer adresatMenedzer("Adresaci.txt");
     idOstatniegoAdresata = 0;
     string daneJednegoAdresataOddzielonePionowymiKreskami = "";

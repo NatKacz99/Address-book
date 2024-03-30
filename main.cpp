@@ -1,8 +1,6 @@
 #include <iostream>
 
 #include "KsiazkaAdresowa.h"
-#include "UzytkownikMenedzer.h"
-#include "PlikZAdresatami.h"
 
 using namespace std;
 
@@ -12,16 +10,15 @@ int main()
     vector <Adresat> adresaci;
     KsiazkaAdresowa ksiazkaAdresowa("Uzytkownicy.txt", "Adresaci.txt");
     char wybor;
-    UzytkownikMenedzer uzytkownikMenedzer("Uzytkownicy.txt");
     int idOstatniegoAdresata;
-    PlikZAdresatami plikZAdresatami("Adresaci.txt");
 
     while (true)
     {
-        int idZalogowanegoUzytkownika = uzytkownikMenedzer.pobierzIdZalogowanegoUzytkownika();
+        int idZalogowanegoUzytkownika = ksiazkaAdresowa.pobierzIdZalogowanegoUzytkownika();
+        cout << idZalogowanegoUzytkownika;
         if (idZalogowanegoUzytkownika == 0)
         {
-            wybor = uzytkownikMenedzer.wybierzOpcjeZMenuGlownego();
+            wybor = ksiazkaAdresowa.wybierzOpcjeZMenuGlownego();
 
             switch (wybor)
             {
@@ -29,7 +26,7 @@ int main()
                 ksiazkaAdresowa.rejestracjaUzytkownika();
                 break;
             case '2':
-                idZalogowanegoUzytkownika = uzytkownikMenedzer.logowanieUzytkownika();
+                idZalogowanegoUzytkownika = ksiazkaAdresowa.logowanieUzytkownika(idZalogowanegoUzytkownika);
                 break;
             case '9':
                 exit(0);
@@ -43,9 +40,9 @@ int main()
         else
         {
             if (adresaci.empty() == true)
-                idOstatniegoAdresata = plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(adresaci, idZalogowanegoUzytkownika);
+                idOstatniegoAdresata = ksiazkaAdresowa.wczytajAdresatowZalogowanegoUzytkownikaZPliku(adresaci, idZalogowanegoUzytkownika);
 
-            wybor = uzytkownikMenedzer.wybierzOpcjeZMenuUzytkownika();
+            wybor = ksiazkaAdresowa.wybierzOpcjeZMenuUzytkownika();
 
             switch (wybor)
             {

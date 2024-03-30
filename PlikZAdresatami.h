@@ -25,7 +25,8 @@ class PlikZAdresatami
     void zmienNazwePliku(string nazwaPlikuTymczasowego, string nazwaPlikuZAdresatami);
 
 public:
-    PlikZAdresatami(string nazwaPlikuZAdresatami) : nazwaPlikuZAdresatami(nazwaPlikuZAdresatami) {};
+    PlikZAdresatami(string nazwaPliku) : nazwaPlikuZAdresatami(nazwaPliku), idOstatniegoAdresata(0) {}
+    PlikZAdresatami() : nazwaPlikuZAdresatami(""), idOstatniegoAdresata(0) {}
     void dopiszAdresataDoPliku(Adresat adresat);
     int wczytajAdresatowZalogowanegoUzytkownikaZPliku(vector <Adresat> adresaci, int idZalogowanegoUzytkownika);
     bool czyPlikJestPusty(fstream &plikZAdresatami);

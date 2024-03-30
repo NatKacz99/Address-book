@@ -9,9 +9,9 @@ void KsiazkaAdresowa::wypiszWszystkichUzytkownikow()
 {
     uzytkownikMenedzer.wypiszWszystkichUzytkownikow();
 }
-void KsiazkaAdresowa::logowanieUzytkownika()
+int KsiazkaAdresowa::logowanieUzytkownika(int &idZalogowanegoUzytkownika)
 {
-    uzytkownikMenedzer.logowanieUzytkownika();
+    return uzytkownikMenedzer.logowanieUzytkownika(idZalogowanegoUzytkownika);
 }
 int KsiazkaAdresowa::dodajAdresata(vector <Adresat> &adresaci, int idZalogowanegoUzytkownika, int idOstatniegoAdresata)
 {
@@ -21,5 +21,19 @@ void KsiazkaAdresowa::wyswietlWszystkichAdresatow(vector <Adresat> &adresaci)
 {
     adresatMenedzer.wyswietlWszystkichAdresatow(adresaci);
 }
-
-
+int KsiazkaAdresowa::pobierzIdZalogowanegoUzytkownika()
+{
+    return uzytkownikMenedzer.pobierzIdZalogowanegoUzytkownika();
+}
+int KsiazkaAdresowa::wczytajAdresatowZalogowanegoUzytkownikaZPliku(vector <Adresat> adresaci, int idZalogowanegoUzytkownika)
+{
+    return plikZAdresatami.wczytajAdresatowZalogowanegoUzytkownikaZPliku(adresaci, idZalogowanegoUzytkownika);
+}
+char KsiazkaAdresowa::wybierzOpcjeZMenuUzytkownika()
+{
+    return uzytkownikMenedzer.wybierzOpcjeZMenuUzytkownika();
+}
+char KsiazkaAdresowa::wybierzOpcjeZMenuGlownego()
+{
+    return uzytkownikMenedzer.wybierzOpcjeZMenuGlownego();
+}

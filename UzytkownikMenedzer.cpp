@@ -27,7 +27,7 @@ int UzytkownikMenedzer::pobierzIdZalogowanegoUzytkownika()
 {
     return idZalogowanegoUzytkownika;
 }
-int UzytkownikMenedzer::logowanieUzytkownika()
+int UzytkownikMenedzer::logowanieUzytkownika(int &idZalogowanegoUzytkownika)
 {
     Uzytkownik uzytkownik;
     string login = "";
@@ -39,6 +39,7 @@ int UzytkownikMenedzer::logowanieUzytkownika()
 
     vector <Uzytkownik>::iterator itr = uzytkownicy.begin();
     while (itr != uzytkownicy.end())
+    {
         if (uzytkownik.pobierzLogin() == login)
         {
             for (int iloscProb = 3; iloscProb > 0; iloscProb--)
@@ -58,7 +59,8 @@ int UzytkownikMenedzer::logowanieUzytkownika()
             system("pause");
             return 0;
         }
-    itr++;
+        itr++;
+    }
     cout << "Nie ma uzytkownika z takim loginem" << endl << endl;
     system("pause");
     return 0;
@@ -82,6 +84,7 @@ Uzytkownik UzytkownikMenedzer::podajDaneNowegoUzytkownika()
     cout << "Podaj haslo: ";
     cin >> haslo;
     uzytkownik.ustawHaslo(haslo);
+    adresatMenedzer.ustawIdZalogowanegoUzytkownika(0);
 
     return uzytkownik;
 }
